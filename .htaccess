@@ -1,0 +1,55 @@
+# Basic Apache security and rewrite rules for PHP project
+
+    # Prevent directory listing
+    Options -Indexes
+
+    # Follow symbolic links (if needed, often default)
+    Options +FollowSymLinks
+
+    # Enable Rewrite Engine
+    RewriteEngine On
+
+    # Redirect non-existent files/directories to index.php (optional, for front controller pattern)
+    # Uncomment if you want all requests to go through index.php
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteRule ^ index.php [L]
+
+    # Deny access to sensitive files
+    <FilesMatch "\.(sql|log|ini|env|bak|config|htpasswd)$">
+        Require all denied
+    </FilesMatch>
+
+    # Deny access to include/config directories directly
+    RewriteRule ^includes/ - [F,L]
+    RewriteRule ^config\.php$ - [F,L]
+    RewriteRule ^database\.sql$ - [F,L]
+    RewriteRule ^uploads/ - [F,L] # Deny direct listing/access to uploads folder if needed
+
+    # Allow access to specific file types within uploads if needed (e.g., images)
+    # Example: Allow direct access to images/pdfs in uploads/screenshots
+    RewriteCond %{REQUEST_URI} ^/uploads/screenshots/.*\.(jpg|jpeg|png|gif|pdf)$ [NC]
+    RewriteRule ^ - [L]
+
+
+    # PHP Settings (optional, if allowed by server config)
+    <IfModule mod_php7.c>
+        # Example: Increase upload size (adjust values as needed)
+        # php_value upload_max_filesize 10M
+        # php_value post_max_size 12M
+
+        # Example: Hide PHP errors from browser output (use error logging instead in production)
+        # php_flag display_errors Off
+        # php_value error_reporting E_ALL
+        # php_value log_errors On
+        # php_value error_log logs/php_error.log # Ensure 'logs' directory exists and is writable
+    </IfModule>
+
+    # Add security headers (optional but recommended)
+    <IfModule mod_headers.c>
+        Header set X-Content-Type-Options "nosniff"
+        Header set X-Frame-Options "SAMEORIGIN"
+        Header set Referrer-Policy "strict-origin-when-cross-origin"
+        # Content Security Policy (CSP) - Start restrictive and loosen as needed
+        # Header set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:;"
+    </IfModule>
