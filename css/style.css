@@ -1,0 +1,91 @@
+/* Basic Body Styling */
+    body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container {
+        flex: 1; /* Allows container to grow and push footer down */
+        max-width: 1100px; /* Or your preferred max width */
+        margin: 20px auto; /* Centers container and adds top/bottom margin */
+        padding: 0 15px; /* Adds padding on the sides */
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+        margin-bottom: 20px; /* Space below navbar */
+        box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    }
+
+    /* Footer Styling */
+    footer {
+        background-color: #e9ecef; /* Light grey background */
+        padding: 1rem 0;
+        text-align: center;
+        margin-top: auto; /* Pushes footer to the bottom */
+        width: 100%;
+    }
+
+    /* Form Styling */
+    .form-control {
+        margin-bottom: 1rem; /* Space between form fields */
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+
+    /* Table Styling */
+    .table {
+        margin-top: 1.5rem;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    /* Dashboard Cards */
+    .card {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Alerts */
+    .alert {
+        margin-top: 1rem;
+    }
+
+    /* Specific Page Styles */
+    .login-form, .register-form, .donation-form, .profile-form, .expense-form {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-form h2, .register-form h2, .donation-form h2, .profile-form h2, .expense-form h2 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .container {
+            margin: 10px auto;
+            padding: 0 10px;
+        }
+        .login-form, .register-form, .donation-form, .profile-form, .expense-form {
+            margin: 1rem auto;
+            padding: 1.5rem;
+        }
+    }
